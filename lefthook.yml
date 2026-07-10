@@ -1,0 +1,17 @@
+repos:
+  - globs: ["*.ts", "*.svelte", "*.js", "*.json"]
+    run: oxlint
+  - globs: ["*.ts", "*.svelte", "*.js", "*.json"]
+    run: oxfmt --check
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.ts,*.svelte,*.js,*.json"
+      run: oxlint {staged_files}
+    format:
+      glob: "*.ts,*.svelte,*.js,*.json"
+      run: oxfmt --check {staged_files}
+    typecheck:
+      run: npm run check
